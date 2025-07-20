@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Thank You - Tech for Girls</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      width: 100vw;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: linear-gradient(120deg, #f9a1bc 0%, #e2528d 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      width: 100vw;
+    }
+    .thankyou-container {
+      z-index: 10;
+      max-width: 480px;
+      padding: 24px;
+      background: rgba(255 255 255 / 0.15);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255 255 255 / 0.3);
+      backdrop-filter: blur(12px);
+      user-select: none;
+    }
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      text-shadow: 0 0 8px #f9a1bc;
+    }
+    p {
+      font-size: 1.3rem;
+      margin-bottom: 24px;
+      font-weight: 600;
+      text-shadow: 0 0 6px #e2528d;
+    }
+    .confetti {
+      position: fixed;
+      width: 14px;
+      height: 14px;
+      background-color: #fff;
+      opacity: 0.98;
+      top: -20px;
+      pointer-events: none;
+      z-index: 9999;
+      animation-name: confetti-fall, confetti-spin;
+      animation-duration: 1.1s, 0.9s;
+      animation-delay: 0s, 0s;
+      animation-timing-function: linear, ease-in-out;
+      animation-iteration-count: 1, 1;
+      border-radius: 2px;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) translateX(0); opacity: 1; }
+      100% { transform: translateY(100vh) translateX(50px); opacity: 0.7; }
+    }
+    @keyframes confetti-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="thankyou-container">
+    <h1>🎉 Thank You for Registering! 🎉</h1>
+    <p>Your submission has been recorded.<br />We appreciate your interest in Tech for Girls.</p>
+    <p>Stay tuned for exciting updates and events!</p>
+  </div>
+  <script>
+    // Neon-bright confetti colors for max contrast and visibility
+    const colors = [
+      '#fff700', '#00ffd0', '#ff00e6', '#00ff2a', '#ff0080',
+      '#00bfff', '#ff6f00', '#ffffff', '#ff3b6e', '#fffc00',
+      '#39ff14', '#ff3131', '#00fffb', '#ffea00', '#ffd6e0'
+    ];
+    const confettiCount = 220;
+    const confettiElements = [];
+
+    function createConfettiPiece() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      const fallDuration = (Math.random() * 0.6 + 0.9) + 's';
+      const spinDuration = (Math.random() * 0.5 + 0.6) + 's';
+      const delay = (Math.random() * 0.6) + 's';
+      confetti.style.animationDuration = `${fallDuration}, ${spinDuration}`;
+      confetti.style.animationDelay = `${delay}, 0s`;
+      confetti.style.width = confetti.style.height = (Math.random() * 10 + 10) + 'px';
+      confetti.style.opacity = Math.random() * 0.2 + 0.8;
+      document.body.appendChild(confetti);
+      confettiElements.push(confetti);
+      setTimeout(() => {
+        confetti.remove();
+      }, 2500);
+    }
+
+    let confettiInterval = setInterval(() => {
+      if (confettiElements.length < confettiCount) {
+        createConfettiPiece();
+      } else {
+        clearInterval(confettiInterval);
+      }
+    }, 10);
+  </script>
+</body>
+</html>
